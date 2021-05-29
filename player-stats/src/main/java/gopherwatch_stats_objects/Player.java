@@ -11,8 +11,18 @@ public class Player {
     private int healing;
     private int blocked;
     private int timePlayed;
-    private ArrayList<Hero> heroes = new ArrayList<>();
+    private ArrayList<Hero> heroesPlayed = new ArrayList<>();
 
+    public Player(String name) {
+        this.name = name;
+        this.elims = 0;
+        this.finalBlows = 0;
+        this.damageDone = 0;
+        this.deaths = 0;
+        this.healing = 0;
+        this.blocked = 0;
+        this.timePlayed = 0;
+    }
 
     public String getName() { return name; }
 
@@ -46,5 +56,5 @@ public class Player {
 
     public void setTimePlayed(int timePlayed) { this.timePlayed = timePlayed; }
 
-    public ArrayList<Hero> getHeroes() { return heroes; }
+    public ArrayList<Hero> getHeroes() { return heroesPlayed; }
 }
