@@ -1,5 +1,5 @@
 public class Hero {
-    private final String name;
+    private String name;
     private int elims;
     private int finalBlows;
     private int damageDone;
