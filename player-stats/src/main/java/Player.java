@@ -1,3 +1,5 @@
+import java.util.List;
+
 public interface Player {
     /**
      * @return player name
@@ -42,5 +44,5 @@ public interface Player {
     /**
      * @return list of heroes
      */
-    List<Heroes> getHeroes();
+    List<Hero> getHeroes();
 }
