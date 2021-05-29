@@ -42,6 +42,19 @@ public class Parser {
             System.out.printf("Deaths: %d%n", player.getDeaths());
             System.out.printf("Healing Done: %.2f%n", player.getHealing());
             System.out.printf("Damage Blocked: %.2f%n", player.getBlocked());
+
+            ArrayList<Hero> heroesPlayed = player.getHeroes();
+            for(Hero hero: heroesPlayed) {
+                System.out.printf("%nHero Name: %s%n", hero.getName());
+                System.out.println("=".repeat(hero.getName().length() + 11));
+                System.out.printf("Time Played: %.2f%n", hero.getTimePlayed());
+                System.out.printf("Eliminations: %d%n", hero.getElims());
+                System.out.printf("Final Blows: %d%n", hero.getFinalBlows());
+                System.out.printf("Damage Done: %.2f%n", hero.getDamageDone());
+                System.out.printf("Deaths: %d%n", hero.getDeaths());
+                System.out.printf("Healing Done: %.2f%n", hero.getHealing());
+                System.out.printf("Damage Blocked: %.2f%n", hero.getBlocked());
+            }
         }
     }
 
@@ -67,26 +80,83 @@ public class Parser {
             String line = fileReader.nextLine().substring(11);
             System.out.println(line);
             if(line.equals(mapName)) {
-                line = fileReader.nextLine();
+                fileReader.nextLine();
                 line = fileReader.nextLine().substring(11);
             }
             String[] tokens = line.split(",");
 
+            double timePlayed = Double.parseDouble(tokens[0]);
+            int elims = Integer.parseInt(tokens[3]);
+            int finalBlows = Integer.parseInt(tokens[4]);
+            double damageDone = Double.parseDouble(tokens[5]);
+            int deaths = Integer.parseInt(tokens[6]);
+            double healing = Double.parseDouble(tokens[7]);
+            double blocked = Double.parseDouble(tokens[8]);
+
             // Update player total stats
-            player.setTimePlayed(Double.parseDouble(tokens[0]));
-            player.setElims(Integer.parseInt(tokens[3]));
-            player.setFinalBlows(Integer.parseInt(tokens[4]));
-            player.setDamageDone(Double.parseDouble(tokens[5]));
-            player.setDeaths(Integer.parseInt(tokens[6]));
-            player.setHealing(Double.parseDouble(tokens[7]));
-            player.setBlocked(Double.parseDouble(tokens[8]));
+            player.setTimePlayed(timePlayed);
+            player.setElims(elims);
+            player.setFinalBlows(finalBlows);
+            player.setDamageDone(damageDone);
+            player.setDeaths(deaths);
+            player.setHealing(healing);
+            player.setBlocked(blocked);
 
-            /*
-            Hero current = player.getCurrentHero();
-            if(!current.getName().equals(tokens[2])) {
-
+            // First Hero
+            if(player.getHeroes().isEmpty()) {
+                Hero newHero = new Hero(tokens[2]);
+                player.setCurrentHero(newHero);
+                player.getHeroes().add(newHero);
+                System.out.println(player.getCurrentHero().getName());
             }
-             */
+
+            Hero currentHero = player.getCurrentHero();
+            // New Hero Played
+            if(!currentHero.getName().equals(tokens[2])) {
+                player.setPreviousPlayedTimePlayed(timePlayed);
+                player.setPreviousPlayedElims(elims);
+                player.setPreviousPlayedFinalBlows(finalBlows);
+                player.setPreviousPlayedDamageDone(damageDone);
+                player.setPreviousPlayedDeaths(deaths);
+                player.setPreviousPlayedHealing(healing);
+                player.setPreviousPlayedBlocked(blocked);
+
+                //Update the hero stats
+                currentHero.setTimePlayed(timePlayed - player.getPreviousPlayedTimePlayed());
+                currentHero.setElims(elims - player.getPreviousPlayedElims());
+                currentHero.setFinalBlows(finalBlows - player.getPreviousPlayedFinalBlows());
+                currentHero.setDamageDone(damageDone - player.getPreviousPlayedDamageDone());
+                currentHero.setDeaths(deaths - player.getPreviousPlayedDeaths());
+                currentHero.setHealing(healing - player.getPreviousPlayedHealing());
+                currentHero.setBlocked(blocked - player.getPreviousPlayedHealing());
+
+                ArrayList<Hero> heroes = player.getHeroes();
+                boolean hasPlayedHeroBefore = false;
+                int index = 0;
+                for(Hero hero: heroes) {
+                    if(hero.getName().equals(tokens[2])) {
+                        hasPlayedHeroBefore = true;
+                        index = heroes.indexOf(hero);
+                        break;
+                    }
+                }
+
+                if(!hasPlayedHeroBefore) {
+                    Hero newHero = new Hero(tokens[2]);
+                    player.setCurrentHero(newHero);
+                    player.getHeroes().add(newHero);
+                } else {
+                    player.setCurrentHero(heroes.get(index));
+                }
+            } else {
+                currentHero.setTimePlayed(timePlayed - player.getPreviousPlayedTimePlayed());
+                currentHero.setElims(elims - player.getPreviousPlayedElims());
+                currentHero.setFinalBlows(finalBlows - player.getPreviousPlayedFinalBlows());
+                currentHero.setDamageDone(damageDone - player.getPreviousPlayedDamageDone());
+                currentHero.setDeaths(deaths - player.getPreviousPlayedDeaths());
+                currentHero.setHealing(healing - player.getPreviousPlayedHealing());
+                currentHero.setBlocked(blocked - player.getPreviousPlayedHealing());
+            }
         }
     }
 }

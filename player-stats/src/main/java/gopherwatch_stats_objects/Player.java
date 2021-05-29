@@ -3,6 +3,7 @@ package gopherwatch_stats_objects;
 import java.util.ArrayList;
 
 public class Player {
+    // player total stat variables
     private String name;
     private int elims;
     private int finalBlows;
@@ -12,7 +13,17 @@ public class Player {
     private double blocked;
     private double timePlayed;
     private ArrayList<Hero> heroesPlayed = new ArrayList<>();
+
+    // player current hero stats
     private Hero currentHero;
+
+    private int previousPlayedElims;
+    private int previousPlayedFinalBlows;
+    private double previousPlayedDamageDone;
+    private int previousPlayedDeaths;
+    private double previousPlayedHealing;
+    private double previousPlayedBlocked;
+    private double previousPlayedTimePlayed;
 
     public Player(String name) {
         this.name = name;
@@ -63,4 +74,32 @@ public class Player {
     public void setCurrentHero(Hero currentHero)  { this.currentHero = currentHero; }
 
     public ArrayList<Hero> getHeroes() { return heroesPlayed; }
+
+    public int getPreviousPlayedElims() { return previousPlayedElims; }
+
+    public void setPreviousPlayedElims(int previousPlayedElims) { this.previousPlayedElims = previousPlayedElims; }
+
+    public int getPreviousPlayedFinalBlows() { return previousPlayedFinalBlows; }
+
+    public void setPreviousPlayedFinalBlows(int previousPlayedFinalBlows) { this.previousPlayedFinalBlows = previousPlayedFinalBlows; }
+
+    public double getPreviousPlayedDamageDone() { return previousPlayedDamageDone; }
+
+    public void setPreviousPlayedDamageDone(double previousPlayedDamageDone) { this.previousPlayedDamageDone = previousPlayedDamageDone; }
+
+    public int getPreviousPlayedDeaths() { return previousPlayedDeaths; }
+
+    public void setPreviousPlayedDeaths(int previousPlayedDeaths) { this.previousPlayedDeaths = previousPlayedDeaths; }
+
+    public double getPreviousPlayedHealing() { return previousPlayedHealing; }
+
+    public void setPreviousPlayedHealing(double previousPlayedHealing) { this.previousPlayedHealing = previousPlayedHealing; }
+
+    public double getPreviousPlayedBlocked() { return previousPlayedBlocked; }
+
+    public void setPreviousPlayedBlocked(double previousPlayedBlocked) { this.previousPlayedBlocked = previousPlayedBlocked; }
+
+    public double getPreviousPlayedTimePlayed() { return previousPlayedTimePlayed; }
+
+    public void setPreviousPlayedTimePlayed(double previousPlayedTimePlayed) { this.previousPlayedTimePlayed = previousPlayedTimePlayed; }
 }
