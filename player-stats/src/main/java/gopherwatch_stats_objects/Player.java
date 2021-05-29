@@ -1,4 +1,8 @@
-public class Hero {
+package gopherwatch_stats_objects;
+
+import java.util.ArrayList;
+
+public class Player {
     private String name;
     private int elims;
     private int finalBlows;
@@ -7,6 +11,8 @@ public class Hero {
     private int healing;
     private int blocked;
     private int timePlayed;
+    private ArrayList<Hero> heroes = new ArrayList<>();
+
 
     public String getName() { return name; }
 
@@ -39,4 +45,6 @@ public class Hero {
     public void setBlocked(int blocked) { this.blocked = blocked; }
 
     public void setTimePlayed(int timePlayed) { this.timePlayed = timePlayed; }
+
+    public ArrayList<Hero> getHeroes() { return heroes; }
 }
