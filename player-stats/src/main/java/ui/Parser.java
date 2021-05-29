@@ -107,20 +107,11 @@ public class Parser {
                 Hero newHero = new Hero(tokens[2]);
                 player.setCurrentHero(newHero);
                 player.getHeroes().add(newHero);
-                System.out.println(player.getCurrentHero().getName());
             }
 
             Hero currentHero = player.getCurrentHero();
             // New Hero Played
             if(!currentHero.getName().equals(tokens[2])) {
-                player.setPreviousPlayedTimePlayed(timePlayed);
-                player.setPreviousPlayedElims(elims);
-                player.setPreviousPlayedFinalBlows(finalBlows);
-                player.setPreviousPlayedDamageDone(damageDone);
-                player.setPreviousPlayedDeaths(deaths);
-                player.setPreviousPlayedHealing(healing);
-                player.setPreviousPlayedBlocked(blocked);
-
                 //Update the hero stats
                 currentHero.setTimePlayed(timePlayed - player.getPreviousPlayedTimePlayed());
                 currentHero.setElims(elims - player.getPreviousPlayedElims());
@@ -128,7 +119,15 @@ public class Parser {
                 currentHero.setDamageDone(damageDone - player.getPreviousPlayedDamageDone());
                 currentHero.setDeaths(deaths - player.getPreviousPlayedDeaths());
                 currentHero.setHealing(healing - player.getPreviousPlayedHealing());
-                currentHero.setBlocked(blocked - player.getPreviousPlayedHealing());
+                currentHero.setBlocked(blocked - player.getPreviousPlayedBlocked());
+
+                player.setPreviousPlayedTimePlayed(timePlayed);
+                player.setPreviousPlayedElims(elims);
+                player.setPreviousPlayedFinalBlows(finalBlows);
+                player.setPreviousPlayedDamageDone(damageDone);
+                player.setPreviousPlayedDeaths(deaths);
+                player.setPreviousPlayedHealing(healing);
+                player.setPreviousPlayedBlocked(blocked);
 
                 ArrayList<Hero> heroes = player.getHeroes();
                 boolean hasPlayedHeroBefore = false;
@@ -155,7 +154,7 @@ public class Parser {
                 currentHero.setDamageDone(damageDone - player.getPreviousPlayedDamageDone());
                 currentHero.setDeaths(deaths - player.getPreviousPlayedDeaths());
                 currentHero.setHealing(healing - player.getPreviousPlayedHealing());
-                currentHero.setBlocked(blocked - player.getPreviousPlayedHealing());
+                currentHero.setBlocked(blocked - player.getPreviousPlayedBlocked());
             }
         }
     }
