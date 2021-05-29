@@ -1,48 +1,48 @@
-import java.util.List;
+import java.util.ArrayList;
 
-public interface Player {
-    /**
-     * @return player name
-     */
-    String getName();
+public class Player {
+    private String name;
+    private int elims;
+    private int finalBlows;
+    private int damageDone;
+    private int deaths;
+    private int healing;
+    private int blocked;
+    private int timePlayed;
+    private ArrayList<Hero> heroes = new ArrayList<>();
 
-    /**
-     * @return player eliminations
-     */
-    int getElims();
 
-    /**
-     * @return player final blows
-     */
-    int getFinalBlows();
+    public String getName() { return name; }
 
-    /**
-     * @return player damage
-     */
-    int getDamage();
+    public int getElims() { return elims; }
 
-    /**
-     * @return player deaths
-     */
-    int getDeaths();
+    public int getFinalBlows() { return finalBlows; }
 
-    /**
-     * @return player healing
-     */
-    int getHealing();
+    public int getDamageDone() { return damageDone; }
 
-    /**
-     * @return player blocked
-     */
-    int getBlocked();
+    public int getDeaths() { return deaths; }
 
-    /**
-     * @return player time played
-     */
-    int getPlayerTime();
+    public int getHealing() { return healing; }
 
-    /**
-     * @return list of heroes
-     */
-    List<Hero> getHeroes();
+    public int getBlocked() { return blocked; }
+
+    public int getTimePlayed() { return timePlayed; }
+
+    public void setName(String name) { this.name = name; }
+
+    public void setElims(int elims) { this.elims = elims; }
+
+    public void setFinalBlows(int finalBlows) { this.finalBlows = finalBlows; }
+
+    public void setDamageDone(int damageDone) { this.damageDone = damageDone; }
+
+    public void setDeaths(int deaths) { this.deaths = deaths; }
+
+    public void setHealing(int healing) { this.healing = healing; }
+
+    public void setBlocked(int blocked) { this.blocked = blocked; }
+
+    public void setTimePlayed(int timePlayed) { this.timePlayed = timePlayed; }
+
+    public ArrayList<Hero> getHeroes() { return heroes; }
 }
