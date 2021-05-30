@@ -17,13 +17,13 @@ public class Player {
     // player current hero stats
     private Hero currentHero;
 
-    private int previousPlayedElims;
-    private int previousPlayedFinalBlows;
-    private double previousPlayedDamageDone;
-    private int previousPlayedDeaths;
-    private double previousPlayedHealing;
-    private double previousPlayedBlocked;
-    private double previousPlayedTimePlayed;
+    private int previousElims;
+    private int previousFinalBlows;
+    private double previousDamageDone;
+    private int previousDeaths;
+    private double previousHealing;
+    private double previousBlocked;
+    private double previousTimePlayed;
 
     public Player(String name) {
         this.name = name;
@@ -75,31 +75,31 @@ public class Player {
 
     public ArrayList<Hero> getHeroes() { return heroesPlayed; }
 
-    public int getPreviousPlayedElims() { return previousPlayedElims; }
+    public int getPreviousElims() { return previousElims; }
 
-    public void setPreviousPlayedElims(int previousPlayedElims) { this.previousPlayedElims = previousPlayedElims; }
+    public void setPreviousElims(int previousElims) { this.previousElims = previousElims; }
 
-    public int getPreviousPlayedFinalBlows() { return previousPlayedFinalBlows; }
+    public int getPreviousFinalBlows() { return previousFinalBlows; }
 
-    public void setPreviousPlayedFinalBlows(int previousPlayedFinalBlows) { this.previousPlayedFinalBlows = previousPlayedFinalBlows; }
+    public void setPreviousFinalBlows(int previousFinalBlows) { this.previousFinalBlows = previousFinalBlows; }
 
-    public double getPreviousPlayedDamageDone() { return previousPlayedDamageDone; }
+    public double getPreviousDamageDone() { return previousDamageDone; }
 
-    public void setPreviousPlayedDamageDone(double previousPlayedDamageDone) { this.previousPlayedDamageDone = previousPlayedDamageDone; }
+    public void setPreviousDamageDone(double previousDamageDone) { this.previousDamageDone = previousDamageDone; }
 
-    public int getPreviousPlayedDeaths() { return previousPlayedDeaths; }
+    public int getPreviousDeaths() { return previousDeaths; }
 
-    public void setPreviousPlayedDeaths(int previousPlayedDeaths) { this.previousPlayedDeaths = previousPlayedDeaths; }
+    public void setPreviousDeaths(int previousDeaths) { this.previousDeaths = previousDeaths; }
 
-    public double getPreviousPlayedHealing() { return previousPlayedHealing; }
+    public double getPreviousHealing() { return previousHealing; }
 
-    public void setPreviousPlayedHealing(double previousPlayedHealing) { this.previousPlayedHealing = previousPlayedHealing; }
+    public void setPreviousHealing(double previousHealing) { this.previousHealing = previousHealing; }
 
-    public double getPreviousPlayedBlocked() { return previousPlayedBlocked; }
+    public double getPreviousBlocked() { return previousBlocked; }
 
-    public void setPreviousPlayedBlocked(double previousPlayedBlocked) { this.previousPlayedBlocked = previousPlayedBlocked; }
+    public void setPreviousBlocked(double previousBlocked) { this.previousBlocked = previousBlocked; }
 
-    public double getPreviousPlayedTimePlayed() { return previousPlayedTimePlayed; }
+    public double getPreviousTimePlayed() { return previousTimePlayed; }
 
-    public void setPreviousPlayedTimePlayed(double previousPlayedTimePlayed) { this.previousPlayedTimePlayed = previousPlayedTimePlayed; }
+    public void setPreviousTimePlayed(double previousTimePlayed) { this.previousTimePlayed = previousTimePlayed; }
 }

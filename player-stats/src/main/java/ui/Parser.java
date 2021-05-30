@@ -6,7 +6,6 @@ import gopherwatch_stats_objects.Player;
 import java.io.FileInputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Parser {
@@ -23,8 +22,6 @@ public class Parser {
 
         // creates the players
         playersInMap = generatePlayers(fileReader);
-
-        // TODO PARSE REST OF FILE FOR PLAYER STATS
 
         while(fileReader.hasNext()){
             updatePlayers(playersInMap, fileReader, mapName);
@@ -110,52 +107,54 @@ public class Parser {
             }
 
             Hero currentHero = player.getCurrentHero();
+
             // New Hero Played
             if(!currentHero.getName().equals(tokens[2])) {
-                //Update the hero stats
-                currentHero.setTimePlayed(timePlayed - player.getPreviousPlayedTimePlayed());
-                currentHero.setElims(elims - player.getPreviousPlayedElims());
-                currentHero.setFinalBlows(finalBlows - player.getPreviousPlayedFinalBlows());
-                currentHero.setDamageDone(damageDone - player.getPreviousPlayedDamageDone());
-                currentHero.setDeaths(deaths - player.getPreviousPlayedDeaths());
-                currentHero.setHealing(healing - player.getPreviousPlayedHealing());
-                currentHero.setBlocked(blocked - player.getPreviousPlayedBlocked());
-
-                player.setPreviousPlayedTimePlayed(timePlayed);
-                player.setPreviousPlayedElims(elims);
-                player.setPreviousPlayedFinalBlows(finalBlows);
-                player.setPreviousPlayedDamageDone(damageDone);
-                player.setPreviousPlayedDeaths(deaths);
-                player.setPreviousPlayedHealing(healing);
-                player.setPreviousPlayedBlocked(blocked);
-
-                ArrayList<Hero> heroes = player.getHeroes();
-                boolean hasPlayedHeroBefore = false;
-                int index = 0;
-                for(Hero hero: heroes) {
-                    if(hero.getName().equals(tokens[2])) {
-                        hasPlayedHeroBefore = true;
-                        index = heroes.indexOf(hero);
-                        break;
-                    }
-                }
-
-                if(!hasPlayedHeroBefore) {
-                    Hero newHero = new Hero(tokens[2]);
-                    player.setCurrentHero(newHero);
-                    player.getHeroes().add(newHero);
-                } else {
-                    player.setCurrentHero(heroes.get(index));
-                }
+                createNewHero(currentHero, player, tokens, timePlayed, elims, finalBlows, damageDone, deaths, healing, blocked);
             } else {
-                currentHero.setTimePlayed(timePlayed - player.getPreviousPlayedTimePlayed());
-                currentHero.setElims(elims - player.getPreviousPlayedElims());
-                currentHero.setFinalBlows(finalBlows - player.getPreviousPlayedFinalBlows());
-                currentHero.setDamageDone(damageDone - player.getPreviousPlayedDamageDone());
-                currentHero.setDeaths(deaths - player.getPreviousPlayedDeaths());
-                currentHero.setHealing(healing - player.getPreviousPlayedHealing());
-                currentHero.setBlocked(blocked - player.getPreviousPlayedBlocked());
+                updateHero(currentHero, player, timePlayed, elims, finalBlows, damageDone, deaths, healing, blocked)
             }
+        }
+    }
+
+    public static void updateHero(Hero cHero, Player player, double time, int e, int fB, double dD, int d, double h, double b) {
+        cHero.setTimePlayed(time - player.getPreviousTimePlayed());
+        cHero.setElims(e - player.getPreviousElims());
+        cHero.setFinalBlows(fB - player.getPreviousFinalBlows());
+        cHero.setDamageDone(dD - player.getPreviousDamageDone());
+        cHero.setDeaths(d - player.getPreviousDeaths());
+        cHero.setHealing(h - player.getPreviousHealing());
+        cHero.setBlocked(b - player.getPreviousBlocked());
+    }
+
+    public static void createNewHero(Hero cHero, Player player, String[] tokens, double time, int e, int fB, double dD, int d, double h, double b) {
+        updateHero(cHero, player, time, e, fB, dD, d, h, b);
+
+        player.setPreviousTimePlayed(time);
+        player.setPreviousElims(e);
+        player.setPreviousFinalBlows(fB);
+        player.setPreviousDamageDone(dD);
+        player.setPreviousDeaths(d);
+        player.setPreviousHealing(h);
+        player.setPreviousBlocked(b);
+
+        ArrayList<Hero> heroes = player.getHeroes();
+        boolean hasPlayedHeroBefore = false;
+        int index = 0;
+        for(Hero hero: heroes) {
+            if(hero.getName().equals(tokens[2])) {
+                hasPlayedHeroBefore = true;
+                index = heroes.indexOf(hero);
+                break;
+            }
+        }
+
+        if(!hasPlayedHeroBefore) {
+            Hero newHero = new Hero(tokens[2]);
+            player.setCurrentHero(newHero);
+            player.getHeroes().add(newHero);
+        } else {
+            player.setCurrentHero(heroes.get(index));
         }
     }
 }
