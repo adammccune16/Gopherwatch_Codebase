@@ -52,4 +52,16 @@ public class Hero {
     public void setBlocked(double blocked) { this.blocked = blocked; }
 
     public void setTimePlayed(double timePlayed) { this.timePlayed = timePlayed; }
+
+    public void Print() {
+        System.out.printf("%nHero Name: %s%n", getName());
+        System.out.println("=".repeat(getName().length() + 11));
+        System.out.printf("Time Played: %.2f%n", getTimePlayed());
+        System.out.printf("Eliminations: %d%n", getElims());
+        System.out.printf("Final Blows: %d%n", getFinalBlows());
+        System.out.printf("Damage Done: %.2f%n", getDamageDone());
+        System.out.printf("Deaths: %d%n", getDeaths());
+        System.out.printf("Healing Done: %.2f%n", getHealing());
+        System.out.printf("Damage Blocked: %.2f%n", getBlocked());
+    }
 }
