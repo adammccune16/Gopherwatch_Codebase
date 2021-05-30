@@ -3,6 +3,7 @@ package ui;
 import gopherwatch_stats_objects.Hero;
 import gopherwatch_stats_objects.Player;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -11,25 +12,26 @@ import java.io.FileNotFoundException;
 public class Parser {
     public void Run() throws FileNotFoundException {
         ArrayList<Player> playersInMap;
-        // TODO CREATE THE ABILITY TO ENTER ANOTHER FILE NAME
-        FileInputStream fIn = new FileInputStream("C:\\Users\\Ryan\\Documents\\Overwatch\\Workshop\\Log-2021-05-03-22-59-19.txt");
-        Scanner fileReader = new Scanner(fIn);
 
-        // needed to avoid errors when parsing the log
-        String mapName = fileReader.nextLine().substring(11);
+        File directory = new File("C:\\Users\\Ryan\\Documents\\Overwatch\\Workshop");
+        File fileList[] = directory.listFiles();
 
-        // creates the players
-        playersInMap = generatePlayers(fileReader);
+        for(File file: fileList) {
+            Scanner fileReader = new Scanner(file);
 
-        while(fileReader.hasNext()){
-            for(Player player: playersInMap) {
-                updatePlayer(player, getTokens(fileReader, mapName));
+            // needed to avoid errors when parsing the log
+            String mapName = fileReader.nextLine().substring(11);
+
+            // creates the players
+            playersInMap = generatePlayers(fileReader);
+
+            while(fileReader.hasNext()){
+                for(Player player: playersInMap) {
+                    updatePlayer(player, getTokens(fileReader, mapName));
+                }
             }
+            debug(playersInMap);
         }
-
-        fileReader.close();
-
-        debug(playersInMap);
     }
 
     public static ArrayList<Player> generatePlayers(Scanner fileReader) {
