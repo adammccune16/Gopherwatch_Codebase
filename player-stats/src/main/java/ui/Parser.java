@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.io.FileNotFoundException;
 
 public class Parser {
-    private ArrayList<Player> playersInMap = new ArrayList<>();
-
     public void Run() throws FileNotFoundException {
+        ArrayList<Player> playersInMap;
         // TODO CREATE THE ABILITY TO ENTER ANOTHER FILE NAME
         FileInputStream fIn = new FileInputStream("C:\\Users\\Ryan\\Documents\\Overwatch\\Workshop\\Log-2021-05-03-22-59-19.txt");
         Scanner fileReader = new Scanner(fIn);
