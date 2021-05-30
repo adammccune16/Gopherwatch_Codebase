@@ -102,4 +102,24 @@ public class Player {
     public double getPreviousTimePlayed() { return previousTimePlayed; }
 
     public void setPreviousTimePlayed(double previousTimePlayed) { this.previousTimePlayed = previousTimePlayed; }
+
+    public void setCurrentStats(double timePlayed, int elims, int finalBlows, double damageDone, int deaths, double healing, double blocked) {
+        setTimePlayed(timePlayed);
+        setElims(elims);
+        setFinalBlows(finalBlows);
+        setDamageDone(damageDone);
+        setDeaths(deaths);
+        setHealing(healing);
+        setBlocked(blocked);
+    }
+
+        public void setPreviousStats(double timePlayed, int elims, int finalBlows, double damageDone, int deaths, double healing, double blocked) {
+        setPreviousTimePlayed(timePlayed);
+        setPreviousElims(elims);
+        setPreviousFinalBlows(finalBlows);
+        setPreviousDamageDone(damageDone);
+        setPreviousDeaths(deaths);
+        setPreviousHealing(healing);
+        setPreviousBlocked(blocked);
+    }
 }

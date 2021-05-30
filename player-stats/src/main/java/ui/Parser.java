@@ -74,13 +74,7 @@ public class Parser {
 
     public static void updatePlayers(ArrayList<Player> players, Scanner fileReader, String mapName) {
         for(Player player: players) {
-            String line = fileReader.nextLine().substring(11);
-            System.out.println(line);
-            if(line.equals(mapName)) {
-                fileReader.nextLine();
-                line = fileReader.nextLine().substring(11);
-            }
-            String[] tokens = line.split(",");
+            String[] tokens = getTokens(fileReader, mapName);
 
             double timePlayed = Double.parseDouble(tokens[0]);
             int elims = Integer.parseInt(tokens[3]);
@@ -91,13 +85,7 @@ public class Parser {
             double blocked = Double.parseDouble(tokens[8]);
 
             // Update player total stats
-            player.setTimePlayed(timePlayed);
-            player.setElims(elims);
-            player.setFinalBlows(finalBlows);
-            player.setDamageDone(damageDone);
-            player.setDeaths(deaths);
-            player.setHealing(healing);
-            player.setBlocked(blocked);
+            player.setCurrentStats(timePlayed, elims, finalBlows, damageDone, deaths, healing, blocked);
 
             // First Hero
             if(player.getHeroes().isEmpty()) {
@@ -112,9 +100,20 @@ public class Parser {
             if(!currentHero.getName().equals(tokens[2])) {
                 createNewHero(currentHero, player, tokens, timePlayed, elims, finalBlows, damageDone, deaths, healing, blocked);
             } else {
-                updateHero(currentHero, player, timePlayed, elims, finalBlows, damageDone, deaths, healing, blocked)
+                updateHero(currentHero, player, timePlayed, elims, finalBlows, damageDone, deaths, healing, blocked);
             }
         }
+    }
+
+    public static String[] getTokens(Scanner fileReader, String mapName) {
+        String line = fileReader.nextLine().substring(11);
+        System.out.println(line);
+        if(line.equals(mapName)) {
+            fileReader.nextLine();
+            line = fileReader.nextLine().substring(11);
+        }
+        String[] tokenList = line.split(",");
+        return tokenList;
     }
 
     public static void updateHero(Hero cHero, Player player, double time, int e, int fB, double dD, int d, double h, double b) {
@@ -130,13 +129,7 @@ public class Parser {
     public static void createNewHero(Hero cHero, Player player, String[] tokens, double time, int e, int fB, double dD, int d, double h, double b) {
         updateHero(cHero, player, time, e, fB, dD, d, h, b);
 
-        player.setPreviousTimePlayed(time);
-        player.setPreviousElims(e);
-        player.setPreviousFinalBlows(fB);
-        player.setPreviousDamageDone(dD);
-        player.setPreviousDeaths(d);
-        player.setPreviousHealing(h);
-        player.setPreviousBlocked(b);
+        player.setPreviousStats(time, e, fB, dD, d, h, b);
 
         ArrayList<Hero> heroes = player.getHeroes();
         boolean hasPlayedHeroBefore = false;
