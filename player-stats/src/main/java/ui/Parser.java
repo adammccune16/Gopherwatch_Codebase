@@ -5,18 +5,19 @@ import gopherwatch_stats_objects.Player;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.FileNotFoundException;
 
 public class Parser {
     public void Run() throws FileNotFoundException {
         ArrayList<Player> playersInMap;
 
-        File directory = new File("C:\\Users\\Ryan\\Documents\\Overwatch\\Workshop");
+        File directory = new File("C:\\Users\\Ryan\\Documents\\Overwatch\\Workshop\\NEEDS_TO_BE_ADDED");
         File fileList[] = directory.listFiles();
 
         for(File file: fileList) {
+            //System.out.printf("%n%s%n", file.getName());
             Scanner fileReader = new Scanner(file);
 
             // needed to avoid errors when parsing the log
@@ -125,11 +126,11 @@ public class Parser {
 
     public void debug(ArrayList<Player> players) {
         for(Player player: players) {
-            player.Print();
-
             ArrayList<Hero> heroesPlayed = player.getHeroes();
             for(Hero hero: heroesPlayed) {
+                System.out.print(player.getName() + ",");
                 hero.Print();
+                System.out.print("\n");
             }
         }
     }

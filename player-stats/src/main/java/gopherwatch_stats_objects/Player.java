@@ -126,12 +126,5 @@ public class Player {
     public void Print() {
         System.out.printf("%nPlayer Name: %s%n", getName());
         System.out.println("=".repeat(getName().length() + 13));
-        System.out.printf("Time Played: %.2f%n", getTimePlayed());
-        System.out.printf("Eliminations: %d%n", getElims());
-        System.out.printf("Final Blows: %d%n", getFinalBlows());
-        System.out.printf("Damage Done: %.2f%n", getDamageDone());
-        System.out.printf("Deaths: %d%n", getDeaths());
-        System.out.printf("Healing Done: %.2f%n", getHealing());
-        System.out.printf("Damage Blocked: %.2f%n", getBlocked());
     }
 }
